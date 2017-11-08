@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    public static void calcularCambio(double moneda, String a) {
+    public static boolean calcularCambio(double moneda, String a) {
         double resultado;
         resultado = 0;
-
+        boolean bucle = true;
         switch (a) {
             case "usd":
                 resultado = moneda * 1.15945;
@@ -33,11 +33,12 @@ public class Main {
                 System.out.println(resultado);
                 break;
             default:
+                bucle = false;
                 System.out.println("Error");
 
         }
 
-
+        return bucle;
     }
 
 
@@ -47,9 +48,13 @@ public class Main {
         double moneda;
         System.out.print("Introduzca una cantidad en euros: ");
         moneda = Double.parseDouble(br.readLine());
+        boolean repeticion = true;
 
-        System.out.print("Moneda a la que convertir (USD, GBP, CNY, JPY): ");
-        a = br.readLine();
-        calcularCambio(moneda, a);
+        do {
+            System.out.print("Moneda a la que convertir (USD, GBP, CNY, JPY): ");
+            a = br.readLine();
+            repeticion = calcularCambio(moneda, a);
+        } while (repeticion == false);
+
     }
 }
